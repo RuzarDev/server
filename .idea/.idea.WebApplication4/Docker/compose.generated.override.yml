@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  crm.api:
+    build:
+      context: "/home/ruzar/RiderProjects/WebApplication4"
+      dockerfile: "Crm.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net10.0/Crm.Api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "crm.api:dev"
+    ports: []
+    volumes:
+    - "/home/ruzar/RiderProjects/WebApplication4/Crm.Api:/app:rw"
+    - "/home/ruzar/RiderProjects/WebApplication4:/src:rw"
+    - "/home/ruzar/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
