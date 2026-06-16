@@ -41,11 +41,13 @@ public static class Register
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapPost("auth/register",
-                async (CommandHandler handler, Command command, CancellationToken cancellationToken) =>
+                async (ICommandHandler<Command,Response> handler,Request request, CancellationToken cancellationToken) =>
                 {
+                    var command = new Command(request.Email, request.Password);
                     var result = await handler.Handle(command, cancellationToken);
                     return  result.IsSuccess ? Results.Ok(result.Value) : Results.StatusCode(result.Error.StatusCode);
                 });
         }
+        public record Request(string Email, string Password);
     }
 }
