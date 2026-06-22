@@ -5,9 +5,9 @@ using Crm.Presentation.Endpoints;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crm.Api.Features.user;
+namespace Crm.Api.Features.User;
 
-public partial class DeleteUser
+public  class SoftDeleteUser
 {
     public record Command(Guid UserId) : ICommand;
 
@@ -20,7 +20,7 @@ public partial class DeleteUser
             {
                 return Result.Failure(new Error("User.NotFound", "User not found",404));
             }
-            dbContext.Users.Remove(user);
+            user.IsDeleted = true;
             await dbContext.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }

@@ -20,7 +20,7 @@ public class UpdateUser
             var validateResult =  Validate(command);
             if (validateResult is false)
             {
-                return Result.Failure(new Error("Validation.Problem", "One of validations didn't pass",400));
+                return Result.Failure(Errors.Validator.Problem);
             }
             var email = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == command.Email, cancellationToken: cancellationToken);
             if (email is not null)

@@ -14,7 +14,7 @@ public class GetUsers
     public record User(Guid Id, string Email);
     public record Response(PaginationResult<User> Users);
  public static class Mappings                                                                                                                                                                                                       
-  {                                                                                                                                                                                                                                  
+    {                                                                                                                                                                                                                                  
       public static readonly SortMappingDefinition<Response, Domain.Entities.User> SortMapping = new()                                                                                                                               
       {                                                                                                                                                                                                                              
           Mappings =                                                                                                                                                                                                                 
@@ -23,7 +23,7 @@ public class GetUsers
               new SortMapping("id", "Id",false),                                                                                                                                                                                           
           ]                                                                                                                                                                                                                          
       };                                                                                                                                                                                                                             
-  }      
+    }      
     public class QueryHandler(ApplicationDbContext dbContext, SortMappingProvider provider ) : IQueryHandler<Query, Response>
     {
         public async Task<Result<Response>> Handle(Query query, CancellationToken cancellationToken)

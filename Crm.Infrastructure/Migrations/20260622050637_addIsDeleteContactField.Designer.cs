@@ -3,6 +3,7 @@ using System;
 using Crm.Infrastucture;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Crm.Infrastucture.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260622050637_addIsDeleteContactField")]
+    partial class addIsDeleteContactField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,29 +51,6 @@ namespace Crm.Infrastucture.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Crm.Domain.Entities.Note", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
-
-                    b.ToTable("Notes");
-                });
-
             modelBuilder.Entity("Crm.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -91,17 +71,6 @@ namespace Crm.Infrastucture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Crm.Domain.Entities.Note", b =>
-                {
-                    b.HasOne("Crm.Domain.Entities.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Contact");
                 });
 #pragma warning restore 612, 618
         }

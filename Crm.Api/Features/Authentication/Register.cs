@@ -14,7 +14,7 @@ public static class Register
     public sealed record Response(string Email);
     public  class CommandHandler(
         ApplicationDbContext dbContext,
-        PasswordHasher<User> passwordHasher) : ICommandHandler<Command,Response>
+        PasswordHasher<Domain.Entities.User> passwordHasher) : ICommandHandler<Command,Response>
     {
         public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
         {
@@ -28,7 +28,7 @@ public static class Register
                         409
                         ));
             }
-            var newUser = new User {Email = command.Email};
+            var newUser = new Domain.Entities.User {Email = command.Email};
             var password = passwordHasher.HashPassword( newUser, command.Password); 
             newUser.Password = password;
             dbContext.Users.Add(newUser);

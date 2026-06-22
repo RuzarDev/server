@@ -16,7 +16,7 @@ public class Login
     public record Response(string Token);
     public class CommandHandler(
         ApplicationDbContext dbContext,
-        PasswordHasher<User> passwordHasher,
+        PasswordHasher<Domain.Entities.User> passwordHasher,
         TokenProvider tokenProvider) : ICommandHandler<Command,Response>
     {
         public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)

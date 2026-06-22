@@ -1,6 +1,7 @@
 
 using Crm.Api.Application.ApiResults;
 using Crm.Api.Application.Messaging;
+using Crm.Api.Application.Sorting;
 using Crm.Infrastucture;
 using Crm.Presentation.Endpoints;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ public class GetContact
     {
         public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
         {
-            var contact = await dbContext.Contacts.FirstOrDefaultAsync(c=>c.Id == command.Id, cancellationToken);
+            var contact = await dbContext.Contacts.FirstOrDefaultAsync(c=>c.Id == command.Id && c.IsDeleted == false, cancellationToken);
             if (contact is null)
             {
                return Result<Response>.Failure(Errors.Contacts.NotFound);
