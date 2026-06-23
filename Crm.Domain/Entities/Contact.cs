@@ -7,5 +7,6 @@ public class Contact : IEntity
     public string PhoneNumber { get; set; }
     public bool IsDeleted { get; set; }
     public List<Note> Notes { get; set; }
+    public List<Tag> Tags { get; set; }
     
 }

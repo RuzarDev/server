@@ -15,4 +15,14 @@ public static class Errors
     {
         public static readonly Error Problem = new Error("Validation.Problem", "One of validations didn't pass", 400);
     }
+    public static class Note
+    {
+        public static readonly Error Exists =  new Error("Note.Exists", "The note already exist", 409);
+        public static readonly Error NotFound =  new Error("Note.NotFound", "The note not found", 404);
+    }
+    public static class Tag
+    {
+        public static readonly Error Exists =  new Error("Tag.Exists", "The tag already exist", 409);
+        public static readonly Error NotFound =  new Error("Tag.NotFound", "The tag not found", 404);
+    }
 }

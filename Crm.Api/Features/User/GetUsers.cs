@@ -31,7 +31,7 @@ public class GetUsers
             var users = dbContext.Users
                 .Sort(query.Sort,provider.GetMappings<Response,Domain.Entities.User>())
                 .Select(u=>new User(u.Id,u.Email));
-            var pagination = await PaginationResult<User>.CreateAsync(users,query.PageIndex, query.PageSize);
+            var pagination = await PaginationResult<User>.CreateAsync(users,query.PageIndex, query.PageSize, cancellationToken);
             return Result<Response>.Success(new Response(pagination));
         }
     }

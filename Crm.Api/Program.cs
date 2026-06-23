@@ -1,4 +1,5 @@
 using System.Text;
+using Anthropic;
 using Crm.Api.Application.Messaging;
 using Crm.Api.Application.Sorting;
 using Crm.Api.Features.Contact;
@@ -42,6 +43,7 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddScoped<TokenProvider>();
 builder.Services.AddTransient<SortMappingProvider>();
 builder.Services.AddSingleton<ISortMappingDefinition>(GetUsers.Mappings.SortMapping);
+builder.Services.AddSingleton<AnthropicClient>();
 builder.Services.AddSingleton<ISortMappingDefinition>(GetContacts.Mappings.SortMapping);
   builder.Services.Scan(scan => scan                                                                                                                                                                                                 
       .FromAssemblyOf<Program>()                                                                                                                                                                                                     
